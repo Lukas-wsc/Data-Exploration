@@ -15,14 +15,3 @@ Testdatensatz aktuell geplant: 'https://github.com/zfz/twitter_corpus'
 
 findet in Preprocessing.ipynb statt
 
-### Modell-Training 
-
-#### Naive-Beyes 
-
-in: 
-
-### VADER und Sentiwordnet (Rule-based Approaches)
-
-in: 
-
-
