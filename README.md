@@ -1,10 +1,28 @@
 # Readme zum Data Exploration Projekt 
 
-### Datenvorverarbeitung 
+### Benutzte Python Version 
 
-findet in Prprocessing.ipynb statt
+Python 3.12.3
 
 ### Datensatz 
 
 Trainingsdatensatz aktuell: 'https://www.kaggle.com/datasets/kazanova/sentiment140'
+
 Testdatensatz aktuell geplant: 'https://github.com/zfz/twitter_corpus' 
+
+
+### Datenvorverarbeitung 
+
+findet in Preprocessing.ipynb statt
+
+### Modell-Training 
+
+#### Naive-Beyes 
+
+in: 
+
+### VADER und Sentiwordnet (Rule-based Approaches)
+
+in: 
+
+
