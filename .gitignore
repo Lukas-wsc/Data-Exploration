@@ -1,7 +1,9 @@
 /venv
+/CSV-Files
 
 *.csv
 
 *.pkl
 
 *.npy
+
