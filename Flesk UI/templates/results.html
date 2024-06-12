@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Prediction Results</h1>
+        <div class="result">
+            <p>Total Positive Predictions: {{ positive_count }}</p>
+            <p>Total Negative Predictions: {{ negative_count }}</p>
+            <p>Most of the data is 
+                {% if positive_count > negative_count %}
+                    <strong>positive</strong>
+                {% else %}
+                    <strong>negative</strong>
+                {% endif %}
+            </p>
+            <a href="{{ url_for('download_file', filename=filename) }}" class="btn btn-primary">Download Predictions</a>
+        </div>
+    </div>
+</body>
+</html>
