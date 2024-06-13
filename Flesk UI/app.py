@@ -10,6 +10,7 @@ nltk.download('punkt')
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 
+# Load the pre-trained model
 with open('model.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
@@ -38,9 +39,11 @@ def upload_file():
         
         data = pd.read_csv(filepath)
         
+        # Standardize column name
         if 'Text' in data.columns or 'text' in data.columns:
             if 'Text' in data.columns: 
-                data['text'] = data['Text']
+                data.rename(columns={'Text': 'text'}, inplace=True)
+            
             data['features'] = data['text'].apply(lambda text: extract_features(str(text)))
             features_list = data['features'].tolist()
             predictions = model.classify_many(features_list)
@@ -55,6 +58,13 @@ def upload_file():
             return render_template('results.html', positive_count=positive_count, negative_count=negative_count, filename='predictions_with_data.csv')
         else:
             return "Uploaded file does not contain 'Text' or 'text' column"
+
+@app.route('/classify_text', methods=['POST'])
+def classify_text():
+    text = request.form['text']
+    features = extract_features(text)
+    prediction = model.classify(features)
+    return render_template('result_text.html', prediction=prediction, text=text)
 
 @app.route('/download/<filename>')
 def download_file(filename):
