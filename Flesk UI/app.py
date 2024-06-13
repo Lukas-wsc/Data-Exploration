@@ -38,21 +38,23 @@ def upload_file():
         
         data = pd.read_csv(filepath)
         
-        if 'Text' in data.columns:
-            data['features'] = data['Text'].apply(lambda text: extract_features(str(text)))
+        if 'Text' in data.columns or 'text' in data.columns:
+            if 'Text' in data.columns: 
+                data['text'] = data['Text']
+            data['features'] = data['text'].apply(lambda text: extract_features(str(text)))
             features_list = data['features'].tolist()
             predictions = model.classify_many(features_list)
-            
+    
             data['Prediction'] = predictions
             positive_count = sum(1 for p in predictions if p == 'positive')
             negative_count = sum(1 for p in predictions if p == 'negative')
-            
+    
             prediction_file = os.path.join(app.config['UPLOAD_FOLDER'], 'predictions_with_data.csv')
             data.to_csv(prediction_file, index=False)
-            
+    
             return render_template('results.html', positive_count=positive_count, negative_count=negative_count, filename='predictions_with_data.csv')
         else:
-            return "Uploaded file does not contain 'Text' column"
+            return "Uploaded file does not contain 'Text' or 'text' column"
 
 @app.route('/download/<filename>')
 def download_file(filename):
