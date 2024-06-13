@@ -4,15 +4,25 @@ from flask import Flask, request, render_template, redirect, url_for, send_file
 import pickle
 from nltk.tokenize import word_tokenize
 import nltk
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 nltk.download('punkt')
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 
-# Load the pre-trained model
-with open('model.pkl', 'rb') as model_file:
-    model = pickle.load(model_file)
+# Load the pre-trained models
+with open('naive_bayes_with_stopwords_classifier.pkl', 'rb') as nb_model_file:
+    nb_model = pickle.load(nb_model_file)
+
+with open('lgbm_model_with_stopwords.pkl', 'rb') as lgbm_model_file:
+    lgbm_model = pickle.load(lgbm_model_file)
+
+# Initialize TfidfVectorizer for LGBM model
+vectorizer = TfidfVectorizer()
+
+# List of available models
+models = ['Naive Bayes with Stopwords', 'LGBM with TfidfVectorizer']
 
 def extract_features(text):
     words = word_tokenize(text)
@@ -21,7 +31,7 @@ def extract_features(text):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', models=models)
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
@@ -29,6 +39,7 @@ def upload_file():
         return redirect(url_for('index'))
     
     file = request.files['file']
+    model_choice = request.form.get('model')
     
     if file.filename == '':
         return redirect(url_for('index'))
@@ -39,15 +50,22 @@ def upload_file():
         
         data = pd.read_csv(filepath)
         
-        # Standardize column name
         if 'Text' in data.columns or 'text' in data.columns:
             if 'Text' in data.columns: 
                 data.rename(columns={'Text': 'text'}, inplace=True)
             
-            data['features'] = data['text'].apply(lambda text: extract_features(str(text)))
-            features_list = data['features'].tolist()
-            predictions = model.classify_many(features_list)
-    
+            if model_choice == 'Naive Bayes with Stopwords':
+                data['features'] = data['text'].apply(lambda text: extract_features(str(text)))
+                features_list = data['features'].tolist()
+                predictions = nb_model.classify_many(features_list)
+            elif model_choice == 'LGBM with TfidfVectorizer':
+                if 'text' not in data.columns:
+                    return "Uploaded file does not contain 'Text' or 'text' column"
+                
+                # Vectorize the text data
+                X_test = vectorizer.transform(data['text'].astype(str))
+                predictions = lgbm_model.predict(X_test)
+            
             data['Prediction'] = predictions
             positive_count = sum(1 for p in predictions if p == 'positive')
             negative_count = sum(1 for p in predictions if p == 'negative')
@@ -62,8 +80,15 @@ def upload_file():
 @app.route('/classify_text', methods=['POST'])
 def classify_text():
     text = request.form['text']
-    features = extract_features(text)
-    prediction = model.classify(features)
+    model_choice = request.form.get('model')
+    
+    if model_choice == 'Naive Bayes with Stopwords':
+        features = extract_features(text)
+        prediction = nb_model.classify(features)
+    elif model_choice == 'LGBM with TfidfVectorizer':
+        X_test = vectorizer.transform([text])
+        prediction = lgbm_model.predict(X_test)[0]
+    
     return render_template('result_text.html', prediction=prediction, text=text)
 
 @app.route('/download/<filename>')
