@@ -4,7 +4,6 @@ from flask import Flask, request, render_template, redirect, url_for, send_file
 import pickle
 from nltk.tokenize import word_tokenize
 import nltk
-from sklearn.feature_extraction.text import TfidfVectorizer
 
 nltk.download('punkt')
 
@@ -18,8 +17,8 @@ with open('naive_bayes_with_stopwords_classifier.pkl', 'rb') as nb_model_file:
 with open('lgbm_model_with_stopwords.pkl', 'rb') as lgbm_model_file:
     lgbm_model = pickle.load(lgbm_model_file)
 
-# Initialize TfidfVectorizer for LGBM model
-vectorizer = TfidfVectorizer()
+with open ('tfidf_vectorizer.pkl', 'rb') as vectorizer: 
+    vectorizer = pickle.load(vectorizer)
 
 # List of available models
 models = ['Naive Bayes with Stopwords', 'LGBM with TfidfVectorizer']
@@ -65,6 +64,7 @@ def upload_file():
                 # Vectorize the text data
                 X_test = vectorizer.transform(data['text'].astype(str))
                 predictions = lgbm_model.predict(X_test)
+                predictions = ['negative' if pred == 0 else 'positive' for pred in predictions]
             
             data['Prediction'] = predictions
             positive_count = sum(1 for p in predictions if p == 'positive')
@@ -88,6 +88,7 @@ def classify_text():
     elif model_choice == 'LGBM with TfidfVectorizer':
         X_test = vectorizer.transform([text])
         prediction = lgbm_model.predict(X_test)[0]
+        prediction = 'negative' if prediction == 0 else 'positive'
     
     return render_template('result_text.html', prediction=prediction, text=text)
 
