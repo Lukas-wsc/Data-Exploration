@@ -16,6 +16,8 @@ Python 3.12.3
 
 Data preprocessing takes place in `Preprocessing.ipynb`.
 ## Execution Guide
+- Download Training set Sentiment140 at given link and place it into the project at ```Data Exploration/Github/Data-Exploration/Data-Preparation/sentiment140/training.1600000.processed.noemoticon.csv```
+- - Download Validation set twitter-corpus at given link and place it into the project at ```Data Exploration/Github/Data-Exploration/Data-Preparation/twitter-corpus/full-corpus.csv```
 - Ensure the correct sequence: Data Preparation -> Training -> Testing -> Validation -> UI.
   
 1. **Install Required Packages**  
