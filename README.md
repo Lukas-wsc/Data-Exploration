@@ -2,6 +2,19 @@
 
 This project performs sentiment analysis using multiple machine learning and rule-based approaches. It involves data preparation, training, testing, and validation, with a user interface for visualizing results and allowing user interaction.
 
+### Used Python Version
+
+Python 3.12.3
+
+### Dataset
+
+- Training dataset currently used: ['https://www.kaggle.com/datasets/kazanova/sentiment140'](https://www.kaggle.com/datasets/kazanova/sentiment140)
+- The Sentiment140 dataset is large and labeled using emoticons.
+- Validation dataset: ['https://github.com/zfz/twitter_corpus'](https://github.com/zfz/twitter_corpus)
+- The Twitter corpus is smaller but manually labeled, making it ideal for validation.
+### Data Preprocessing
+
+Data preprocessing takes place in `Preprocessing.ipynb`.
 ## Execution Guide
 - Ensure the correct sequence: Data Preparation -> Training -> Testing -> Validation -> UI.
   
@@ -23,11 +36,7 @@ Prepare the datasets by running the preprocessing notebooks:
         ```sh
         jupyter notebook Data-Preparation/twitter-corpus/Preprocessing_corpus.ipynb
         ```
-Notes
-- The Sentiment140 dataset is large and labeled using emoticons.
-- The Twitter corpus is smaller but manually labeled, making it ideal for validation.
-
-
+        
 3. **Training Models**  
 Train the models using the training notebooks:
 
@@ -71,18 +80,7 @@ Start the Flask web application to visualize the results and interact with the m
     - **Upload Datasets:** Users can upload their own datasets and get them labeled by the trained models.
     - **Label Single Sentence:** Users can input a single sentence and get it labeled by different models.
 
-### Used Python Version
 
-Python 3.12.3
-
-### Dataset
-
-- Training dataset currently used: ['https://www.kaggle.com/datasets/kazanova/sentiment140'](https://www.kaggle.com/datasets/kazanova/sentiment140)
-- Planned test dataset: ['https://github.com/zfz/twitter_corpus'](https://github.com/zfz/twitter_corpus)
-
-### Data Preprocessing
-
-Data preprocessing takes place in `Preprocessing.ipynb`.
 
 ## Project Structure
 
