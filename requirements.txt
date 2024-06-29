@@ -6,8 +6,7 @@ nltk
 notebook
 vaderSentiment
 scikit-learn
-ligthgbm
-pickle
+lightgbm
 xgboost
 hyperopt
 setuptools
