@@ -94,7 +94,6 @@ Contains notebooks and scripts for initial data exploration.
   - `Preprocessing_training.ipynb`: Notebook for preprocessing the Sentiment140 training dataset.
   - `testdata_with_stopwords_preprocessed.csv`: Preprocessed test data with stopwords.
   - `testdata_without_stopwords_preprocessed.csv`: Preprocessed test data without stopwords.
-  - `tfidf_vectorizer.pkl`: TF-IDF vectorizer used for transforming text data.
   - `traindata_with_stopwords_preprocessed.csv`: Preprocessed training data with stopwords.
   - `traindata_without_stopwords_preprocessed.csv`: Preprocessed training data without stopwords.
   - `training.1600000.processed.noemoticon.csv`: Raw training data from Sentiment140.
