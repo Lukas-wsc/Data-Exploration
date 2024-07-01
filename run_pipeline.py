@@ -1,12 +1,16 @@
 import subprocess
 import sys
-import os
+import time
 
 def run_notebook(notebook_path):
     """Utility function to run a Jupyter notebook."""
-    result = subprocess.run([sys.executable, '-m', 'jupyter', 'nbconvert', '--to', 'notebook', '--execute', '--inplace', notebook_path])
+    start_time = time.time()
+    result = subprocess.run([sys.executable, '-m', 'jupyter', 'nbconvert', '--execute', '--inplace', notebook_path])
     if result.returncode != 0:
-        raise RuntimeError(f"Failed to execute notebook {notebook_path}")
+        raise RuntimeError(f"Failed to execute notebook {notebook_path}") 
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Execution time for {notebook_path}: {elapsed_time:.2f} seconds")
 
 def install_requirements():
     """Install the required packages."""

@@ -11,14 +11,37 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
 
 # Load the pre-trained models
-with open('naive_bayes_with_stopwords_classifier.pkl', 'rb') as nb_model_file:
+# Set the base directory to the directory where the script is located
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Construct the relative paths to the model files
+naive_bayes_model_path = os.path.join(base_dir, '..', 'ML-Based Approach', 'Training', 'naive_bayes', 'naive_bayes_with_stopwords_classifier.pkl')
+lgbm_model_path = os.path.join(base_dir, 'lgbm_model_with_stopwords.pkl')
+tfidf_vectorizer_path = os.path.join(base_dir, 'tfidf_vectorizer.pkl')
+
+# Ensure the relative paths are correct by printing the absolute paths
+print("Naive Bayes Model path:", naive_bayes_model_path)
+print("LGBM Model path:", lgbm_model_path)
+print("TFIDF Vectorizer path:", tfidf_vectorizer_path)
+
+# Check if the files exist before loading
+if not os.path.isfile(naive_bayes_model_path):
+    raise FileNotFoundError(f"Naive Bayes model file not found: {naive_bayes_model_path}")
+
+if not os.path.isfile(lgbm_model_path):
+    raise FileNotFoundError(f"LGBM model file not found: {lgbm_model_path}")
+
+if not os.path.isfile(tfidf_vectorizer_path):
+    raise FileNotFoundError(f"TFIDF vectorizer file not found: {tfidf_vectorizer_path}")
+
+with open(naive_bayes_model_path, 'rb') as nb_model_file:
     nb_model = pickle.load(nb_model_file)
 
-with open('lgbm_model_with_stopwords.pkl', 'rb') as lgbm_model_file:
+with open(lgbm_model_path, 'rb') as lgbm_model_file:
     lgbm_model = pickle.load(lgbm_model_file)
 
-with open ('tfidf_vectorizer.pkl', 'rb') as vectorizer: 
-    vectorizer = pickle.load(vectorizer)
+with open(tfidf_vectorizer_path, 'rb') as vectorizer_file:
+    vectorizer = pickle.load(vectorizer_file)
 
 # List of available models
 models = ['Naive Bayes with Stopwords', 'LGBM with TfidfVectorizer']
