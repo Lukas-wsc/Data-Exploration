@@ -109,7 +109,7 @@ Contains notebooks and scripts for initial data exploration.
   - `full-corpus.csv`: Raw full corpus data.
   - `Preprocessing_corpus.ipynb`: Notebook for preprocessing the Twitter corpus.
 
-### 3. Flesk UI
+### 3. Flet UI
 - `static/uploads`
   - Contains files related to UI uploads like predictions and labeled data.
   - `predictions_with_data.csv`: Predictions combined with original data.
