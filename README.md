@@ -10,14 +10,14 @@ Python 3.12.3
 
 - Training dataset currently used: ['https://www.kaggle.com/datasets/kazanova/sentiment140'](https://www.kaggle.com/datasets/kazanova/sentiment140)
 - The Sentiment140 dataset is large and labeled using emoticons.
-- Validation dataset: ['https://github.com/zfz/twitter_corpus'](https://github.com/zfz/twitter_corpus)
+- Validation dataset: ([https://github.com/zfz/twitter_corpus](https://github.com/zfz/twitter_corpus/blob/master/full-corpus.csv))
 - The Twitter corpus is smaller but manually labeled, making it ideal for validation.
 ### Data Preprocessing
 
 Data preprocessing takes place in `Preprocessing.ipynb`.
 ## Execution Guide
 - Download Training set Sentiment140 at given link and place it into the project at ```Data Exploration/Github/Data-Exploration/Data-Preparation/sentiment140/training.1600000.processed.noemoticon.csv```
-- - Download Validation set twitter-corpus at given link and place it into the project at ```Data Exploration/Github/Data-Exploration/Data-Preparation/twitter-corpus/full-corpus.csv```
+- Download Validation set twitter-corpus at given link and place it into the project at ```Data Exploration/Github/Data-Exploration/Data-Preparation/twitter-corpus/full-corpus.csv```
 - The sequence in which the files need to be executed is performed by run_pipeline.py. Execute this file in the root directory by performing 
  ```python run_pipeline.py```
 
