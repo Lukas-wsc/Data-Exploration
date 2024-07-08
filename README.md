@@ -1,3 +1,5 @@
+Note: This project was developed using MacOS. If you run into an error, this may be because of other requirements for Windows. Be sure to inform us if you need help resolving any error because of this. 
+
 # Sentiment Analysis Project
 
 This project performs sentiment analysis using multiple machine learning and rule-based approaches. It involves data preparation, training, testing, and validation, with a user interface for visualizing results and allowing user interaction.
