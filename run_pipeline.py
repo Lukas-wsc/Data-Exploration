@@ -25,15 +25,23 @@ def train_models():
     """Run training notebooks."""
     run_notebook('ML-Based Approach/Training/naive_bayes/Naive_Bayes_with_stopwords.ipynb')
     run_notebook('ML-Based Approach/Training/naive_bayes/Naive_Bayes_without_stopwords.ipynb')
+    
+    run_notebook('ML-Based Approach/Training/LGBM/LGBM_with_stopwords.ipynb')
+    run_notebook('ML-Based Approach/Training/LGBM/LGBM_without_stopwords.ipynb')
+
 
 def test_models():
     """Run testing notebooks."""
     run_notebook('ML-Based Approach/Testing/naive_bayes/Naive_Bayes_with_stopwords.ipynb')
     run_notebook('ML-Based Approach/Testing/naive_bayes/Naive_Bayes_without_stopwords.ipynb')
+    
+    run_notebook('ML-Based Approach/Testing/LGBM/LGBM_with_stopwords.ipynb')
+    run_notebook('ML-Based Approach/Testing/LGBM/LGBM_without_stopwords.ipynb')
 
 def validate_models():
     """Run validation notebooks."""
     run_notebook('ML-Based Approach/Validation/naive_bayes_validation.ipynb')
+    run_notebook('ML-Based Approach/Validation/LGBM.ipynb')
 
 def start_ui():
     """Start the Flask web application."""

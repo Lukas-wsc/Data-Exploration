@@ -16,8 +16,8 @@ base_dir = os.path.dirname(os.path.abspath(__file__))
 
 # Construct the relative paths to the model files
 naive_bayes_model_path = os.path.join(base_dir, '..', 'ML-Based Approach', 'Training', 'naive_bayes', 'naive_bayes_with_stopwords_classifier.pkl')
-lgbm_model_path = os.path.join(base_dir, 'lgbm_model_with_stopwords.pkl')
-tfidf_vectorizer_path = os.path.join(base_dir, 'tfidf_vectorizer.pkl')
+lgbm_model_path = os.path.join(base_dir, '..', 'ML-Based Approach', 'Training', 'LGBM', 'lgbm_model_with_stopwords.pkl')
+tfidf_vectorizer_path = os.path.join(base_dir, '..', 'Data-Preparation', 'sentiment140','tfidf_vectorizer.pkl')
 
 # Ensure the relative paths are correct by printing the absolute paths
 print("Naive Bayes Model path:", naive_bayes_model_path)

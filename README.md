@@ -10,7 +10,7 @@ Python 3.12.3
 
 - Training dataset currently used: ['https://www.kaggle.com/datasets/kazanova/sentiment140'](https://www.kaggle.com/datasets/kazanova/sentiment140)
 - The Sentiment140 dataset is large and labeled using emoticons.
-- Validation dataset: [https://github.com/zfz/twitter_corpus](https://github.com/zfz/twitter_corpus/blob/master/full-corpus.csv)
+- Validation dataset: ['https://github.com/zfz/twitter_corpus'](https://github.com/zfz/twitter_corpus/blob/master/full-corpus.csv)
 - The Twitter corpus is smaller but manually labeled, making it ideal for validation.
 ### Data Preprocessing
 
@@ -30,7 +30,8 @@ First, ensure all required packages are installed. You can install them using th
     ```sh
     pip install -r requirements.txt
     ```
-install for the execution of lgbm
+  Install for the execution of lgbm:
+
     - on mac 
     ```sh
     brew install libomp
