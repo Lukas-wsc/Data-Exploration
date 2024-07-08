@@ -30,7 +30,7 @@ First, ensure all required packages are installed. You can install them using th
     ```sh
     pip install -r requirements.txt
     ```
-  Install for the execution of lgbm:
+   Install for the execution of lgbm:
 
     - on mac 
     ```sh
