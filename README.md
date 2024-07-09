@@ -1,3 +1,5 @@
+Note: This project was developed using MacOS. If you run into an error, this may be because of other requirements for Windows. Be sure to inform us if you need help resolving any error because of this. 
+
 # Sentiment Analysis Project
 
 This project performs sentiment analysis using multiple machine learning and rule-based approaches. It involves data preparation, training, testing, and validation, with a user interface for visualizing results and allowing user interaction.
@@ -19,7 +21,9 @@ Data preprocessing takes place in `Preprocessing.ipynb`.
 - Download Training set Sentiment140 at given link and place it into the project at ```Data Exploration/Github/Data-Exploration/Data-Preparation/sentiment140/training.1600000.processed.noemoticon.csv```
 - Download Validation set twitter-corpus at given link and place it into the project at ```Data Exploration/Github/Data-Exploration/Data-Preparation/twitter-corpus/full-corpus.csv```
 - The sequence in which the files need to be executed is performed by run_pipeline.py. Execute this file in the root directory by performing 
- ```python run_pipeline.py```
+ ```sh
+python run_pipeline.py
+```
 
 However, this file needs about 488.87 seconds on an M1 Mac Pro, so expect it to be loading for a while. If the file does run into an error, you can also perform the execution of the notebooks step by step for all given models: 
 Ensure the correct sequence: Data Preparation -> Training -> Testing -> Validation -> UI. 
