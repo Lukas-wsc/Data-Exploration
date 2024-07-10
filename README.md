@@ -34,14 +34,11 @@ First, ensure all required packages are installed. You can install them using th
     ```sh
     pip install -r requirements.txt
     ```
-   Install for the execution of lgbm:
+   If you work on Mac you have to install _libomp_ for the execution of lgbm:
 
-    - on mac 
     ```sh
     brew install libomp
     ```
-    - on windows 
-    ...
 
 
 2. **Data Preparation**  
