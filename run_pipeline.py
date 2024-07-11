@@ -95,7 +95,7 @@ def run_flask_app():
     """Run the Flask app."""
     print("Running Flask app: app.py")
     start_time = time.time()
-    os.system('python Flask UI/app.py')
+    os.system('python Flask\ UI/app.py')
     end_time = time.time()
     elapsed_time = end_time - start_time
     print(f"Completed Flask app: app.py in {elapsed_time:.2f} seconds")
@@ -105,9 +105,9 @@ def start_pipeline():
     """Start the full workflow pipeline."""
     total_start_time = time.time()
     install_requirements()
-    data_preparation() # works
-    run_training() # works
-    run_testing() # works
+    data_preparation() 
+    run_training() 
+    run_testing() 
     run_validation()
     run_flask_app()
     total_end_time = time.time()
