@@ -11,3 +11,5 @@ xgboost
 hyperopt
 setuptools
 flask
+nbformat
+nbconvert
