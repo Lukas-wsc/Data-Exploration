@@ -2,6 +2,8 @@ import os
 import nbformat
 from nbconvert.preprocessors import ExecutePreprocessor
 import time
+import subprocess
+import sys
 
 def run_notebook(notebook_path):
     """Run a Jupyter notebook."""
@@ -17,6 +19,10 @@ def run_notebook(notebook_path):
     elapsed_time = end_time - start_time
     print(f"Completed notebook: {notebook_path} in {elapsed_time:.2f} seconds")
 
+def install_requirements():
+    """Install the required packages."""
+    subprocess.run([sys.executable, '-m', 'pip', 'install', '-r', 'requirements.txt'])
+    
 def data_preparation():
     """Run data preparation notebooks."""
     base_path = os.path.join('Data-Preparation')
@@ -89,7 +95,7 @@ def run_flask_app():
     """Run the Flask app."""
     print("Running Flask app: app.py")
     start_time = time.time()
-    os.system('python Flask\ UI/app.py')
+    os.system('python Flask UI/app.py')
     end_time = time.time()
     elapsed_time = end_time - start_time
     print(f"Completed Flask app: app.py in {elapsed_time:.2f} seconds")
@@ -98,6 +104,7 @@ def run_flask_app():
 def start_pipeline():
     """Start the full workflow pipeline."""
     total_start_time = time.time()
+    install_requirements()
     data_preparation() # works
     run_training() # works
     run_testing() # works
