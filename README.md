@@ -1,3 +1,6 @@
+Github-Repo: 
+https://github.com/Lukas-wsc/Data-Exploration.git
+
 Note: This project was developed using MacOS. If you run into an error, this may be because of other requirements for Windows. Be sure to inform us if you need help resolving any error because of this. 
 
 # Group Members
