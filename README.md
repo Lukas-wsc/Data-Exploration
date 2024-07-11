@@ -41,8 +41,8 @@ Data preprocessing takes place in `Preprocessing.ipynb`.
 python run_pipeline.py
 ```
 
-However, this file needs about 488.87 seconds on an M1 Mac Pro, so expect it to be loading for a while. If the file does run into an error, you can also perform the execution of the notebooks step by step for all given models: 
-Ensure the correct sequence: Data Preparation -> Training -> Testing -> Validation -> UI. 
+However, this file executes all notebooks step by step until all models are trained, tested and validated and provided to the UI so expect it to be loading for a while. If the file does run into an error or takes too long, you can also perform the execution of the notebooks step by step for all given models: 
+Ensure the correct sequence: Data Preparation -> Training -> Testing -> Validation -> UI. The following execution guideline is executed with naive bayes. You can also perform these steps with other models. 
   
 1. **Install Required Packages**  
 First, ensure all required packages are installed. You can install them using the `requirements.txt` file:
@@ -160,6 +160,9 @@ Contains notebooks and scripts for initial data exploration.
   - `naive_bayes`
     - `Naive_Bayes_with_stopwords.ipynb`: Notebook for testing Naive Bayes model with stopwords.
     - `Naive_Bayes_without_stopwords.ipynb`: Notebook for testing Naive Bayes model without stopwords.
+  - `XGBoost`
+    - `XGBoost_with_stopwords.ipynb`
+    - `XGBoost_without_stopwords.ipynb`
   
 - **Training**
   - `LGBM`
@@ -169,9 +172,13 @@ Contains notebooks and scripts for initial data exploration.
     - `Naive_Bayes_without_stopwords_classifier.pkl`: Trained Naive Bayes model without stopwords.
     - `Naive_Bayes_without_stopwords.ipynb`: Notebook for training Naive Bayes model without stopwords.
   - `XGBoost`
+    - `XGBoost_with_stopwords.ipynb`: Notebook for training XGBoost model with stopwords.
+    - `XGBoost_without_stopwords.ipynb`: Notebook for training XGBoost model without stopwords.
 
 - **Validation**
   - `naive_bayes_validation.ipynb`: Notebook for validating Naive Bayes model.
+  - `xgboost_validation.ipynb`: Notebook for validating xgboost model.
+  - `lgbm_validation.ipynb`: Notebook for validating lgbm model.
 
 ### 5. Rule-Based Approach
 - **Testing**
@@ -188,11 +195,13 @@ Contains notebooks and scripts for initial data exploration.
   
 - **Validation**
   - `sentiwordnet_without_stopwords.ipynb`
+  - `vader_with_stopwords.ipynb`
 
 ### Root Files
 - `.gitignore`: Git ignore file.
 - `README.md`: Project readme file.
 - `requirements.txt`: List of required Python packages.
+- `run_pipeline.py`: Execution pipeline for all required files. 
 
 
 
