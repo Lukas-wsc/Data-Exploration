@@ -1,59 +1,111 @@
-import subprocess
-import sys
+import os
+import nbformat
+from nbconvert.preprocessors import ExecutePreprocessor
 import time
 
 def run_notebook(notebook_path):
-    """Utility function to run a Jupyter notebook."""
+    """Run a Jupyter notebook."""
+    print(f"Running notebook: {notebook_path}")
+    if not os.path.exists(notebook_path):
+        raise FileNotFoundError(f"Notebook not found: {notebook_path}")
+    with open(notebook_path) as f:
+        nb = nbformat.read(f, as_version=4)
+    ep = ExecutePreprocessor(timeout=6000, kernel_name='python3')
     start_time = time.time()
-    result = subprocess.run([sys.executable, '-m', 'jupyter', 'nbconvert', '--execute', '--inplace', notebook_path])
-    if result.returncode != 0:
-        raise RuntimeError(f"Failed to execute notebook {notebook_path}") 
+    ep.preprocess(nb, {'metadata': {'path': os.path.dirname(notebook_path)}})
     end_time = time.time()
     elapsed_time = end_time - start_time
-    print(f"Execution time for {notebook_path}: {elapsed_time:.2f} seconds")
-
-def install_requirements():
-    """Install the required packages."""
-    subprocess.run([sys.executable, '-m', 'pip', 'install', '-r', 'requirements.txt'])
+    print(f"Completed notebook: {notebook_path} in {elapsed_time:.2f} seconds")
 
 def data_preparation():
     """Run data preparation notebooks."""
-    run_notebook('Data-Preparation/sentiment140/Preprocessing_training.ipynb')
-    run_notebook('Data-Preparation/twitter-corpus/Preprocessing_corpus.ipynb')
+    base_path = os.path.join('Data-Preparation')
+    notebooks = [
+        os.path.join(base_path, 'sentiment140', 'Preprocessing_training.ipynb'),
+        os.path.join(base_path, 'twitter-corpus', 'Preprocessing_corpus.ipynb')
+    ]
+    for nb in notebooks:
+        run_notebook(nb)
 
-def train_models():
+def run_training():
     """Run training notebooks."""
-    run_notebook('ML-Based Approach/Training/naive_bayes/Naive_Bayes_with_stopwords.ipynb')
-    run_notebook('ML-Based Approach/Training/naive_bayes/Naive_Bayes_without_stopwords.ipynb')
-    
-    run_notebook('ML-Based Approach/Training/LGBM/LGBM_with_stopwords.ipynb')
-    run_notebook('ML-Based Approach/Training/LGBM/LGBM_without_stopwords.ipynb')
+    base_path = os.path.join('ML-Based Approach', 'Training')
+    notebooks = [
+        os.path.join(base_path, 'LGBM', 'LGBM_with_stopwords.ipynb'),
+        os.path.join(base_path, 'LGBM', 'LGBM_without_stopwords.ipynb'),
+        os.path.join(base_path, 'naive_bayes', 'Naive_Bayes_with_stopwords.ipynb'),
+        os.path.join(base_path, 'naive_bayes', 'Naive_Bayes_without_stopwords.ipynb'),
+        os.path.join(base_path, 'XGBoost', 'XGBoost_with_Stopwords.ipynb'),
+        os.path.join(base_path, 'XGBoost', 'XGBoost_without_Stopwords.ipynb'),
+    ]
+    base_path_rule = os.path.join('Rule-Based Approach', 'Training')
+    notebooks_rule = [
+        os.path.join(base_path_rule, 'sentiwordnet_with_stopwords.ipynb'),
+        os.path.join(base_path_rule, 'sentiwordnet_without_stopwords.ipynb'),
+        os.path.join(base_path_rule, 'vader_with_stopwords.ipynb'),
+        os.path.join(base_path_rule, 'vader_without_stopwords.ipynb')
+    ]
+    for nb in notebooks + notebooks_rule:
+        run_notebook(nb)
 
-
-def test_models():
+def run_testing():
     """Run testing notebooks."""
-    run_notebook('ML-Based Approach/Testing/naive_bayes/Naive_Bayes_with_stopwords.ipynb')
-    run_notebook('ML-Based Approach/Testing/naive_bayes/Naive_Bayes_without_stopwords.ipynb')
-    
-    run_notebook('ML-Based Approach/Testing/LGBM/LGBM_with_stopwords.ipynb')
-    run_notebook('ML-Based Approach/Testing/LGBM/LGBM_without_stopwords.ipynb')
+    base_path = os.path.join('ML-Based Approach', 'Testing')
+    notebooks = [
+        os.path.join(base_path, 'LGBM', 'LGBM_with_stopwords.ipynb'),
+        os.path.join(base_path, 'LGBM', 'LGBM_without_stopwords.ipynb'),
+        os.path.join(base_path, 'naive_bayes', 'Naive_Bayes_with_stopwords.ipynb'),
+        os.path.join(base_path, 'naive_bayes', 'Naive_Bayes_without_stopwords.ipynb'),
+        os.path.join(base_path, 'XGBoost', 'XGBoost_with_Stopwords.ipynb'),
+        os.path.join(base_path, 'XGBoost', 'XGBoost_without_Stopwords.ipynb'),
+    ]
+    base_path_rule = os.path.join('Rule-Based Approach', 'Testing')
+    notebooks_rule = [
+        os.path.join(base_path_rule, 'sentiwordnet_with_stopwords.ipynb'),
+        os.path.join(base_path_rule, 'sentiwordnet_without_stopwords.ipynb'),
+        os.path.join(base_path_rule, 'vader_with_stopwords.ipynb'),
+        os.path.join(base_path_rule, 'vader_without_stopwords.ipynb')
+    ]
+    for nb in notebooks + notebooks_rule:
+        run_notebook(nb)
 
-def validate_models():
+def run_validation():
     """Run validation notebooks."""
-    run_notebook('ML-Based Approach/Validation/naive_bayes_validation.ipynb')
-    run_notebook('ML-Based Approach/Validation/LGBM.ipynb')
+    base_path = os.path.join('ML-Based Approach', 'Validation')
+    notebooks = [
+        os.path.join(base_path, 'lgbm_validation.ipynb'),
+        os.path.join(base_path, 'naive_bayes_validation.ipynb'),
+        os.path.join(base_path, 'xgboost_validation.ipynb'),
+    ]
+    base_path_rule = os.path.join('Rule-Based Approach', 'Validation')
+    notebooks_rule = [
+        os.path.join(base_path_rule, 'sentiwordnet_without_stopwords.ipynb'),
+        os.path.join(base_path_rule, 'vader_with_stopwords.ipynb'),
+    ]
+    for nb in notebooks + notebooks_rule:
+        run_notebook(nb)
 
-def start_ui():
-    """Start the Flask web application."""
-    subprocess.run([sys.executable, 'Flesk UI/app.py'])
+def run_flask_app():
+    """Run the Flask app."""
+    print("Running Flask app: app.py")
+    start_time = time.time()
+    os.system('python Flask\ UI/app.py')
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Completed Flask app: app.py in {elapsed_time:.2f} seconds")
 
-def main():
-    install_requirements()
-    data_preparation()
-    train_models()
-    test_models()
-    validate_models()
-    start_ui()
 
-if __name__ == '__main__':
-    main()
+def start_pipeline():
+    """Start the full workflow pipeline."""
+    total_start_time = time.time()
+    data_preparation() # works
+    run_training() # works
+    run_testing() # works
+    run_validation()
+    run_flask_app()
+    total_end_time = time.time()
+    total_elapsed_time = total_end_time - total_start_time
+    print(f"Pipeline execution completed in {total_elapsed_time:.2f} seconds.")
+
+if __name__ == "__main__":
+    start_pipeline()

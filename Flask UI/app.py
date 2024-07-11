@@ -4,6 +4,14 @@ from flask import Flask, request, render_template, redirect, url_for, send_file
 import pickle
 from nltk.tokenize import word_tokenize
 import nltk
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer # importing vader classifier
+
+# Initialize VADER sentiment analyzer
+analyzer = SentimentIntensityAnalyzer()
+
+def classify_sentiment(text):
+    score = analyzer.polarity_scores(text)['compound']
+    return 'positive' if score >= 0.00 else 'negative'
 
 nltk.download('punkt')
 
@@ -44,7 +52,7 @@ with open(tfidf_vectorizer_path, 'rb') as vectorizer_file:
     vectorizer = pickle.load(vectorizer_file)
 
 # List of available models
-models = ['Naive Bayes with Stopwords', 'LGBM with TfidfVectorizer']
+models = ['Naive Bayes with Stopwords', 'LGBM with TfidfVectorizer', 'VADER Sentiment Analyzer']
 
 def extract_features(text):
     words = word_tokenize(text)
@@ -88,7 +96,9 @@ def upload_file():
                 X_test = vectorizer.transform(data['text'].astype(str))
                 predictions = lgbm_model.predict(X_test)
                 predictions = ['negative' if pred == 0 else 'positive' for pred in predictions]
-            
+            elif model_choice == 'VADER Sentiment Analyzer':
+                predictions = data['text'].apply(lambda text: classify_sentiment(str(text)))
+
             data['Prediction'] = predictions
             positive_count = sum(1 for p in predictions if p == 'positive')
             negative_count = sum(1 for p in predictions if p == 'negative')
@@ -112,6 +122,8 @@ def classify_text():
         X_test = vectorizer.transform([text])
         prediction = lgbm_model.predict(X_test)[0]
         prediction = 'negative' if prediction == 0 else 'positive'
+    elif model_choice == 'VADER Sentiment Analyzer':
+        prediction = classify_sentiment(text)
     
     return render_template('result_text.html', prediction=prediction, text=text)
 
