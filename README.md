@@ -1,8 +1,22 @@
 Note: This project was developed using MacOS. If you run into an error, this may be because of other requirements for Windows. Be sure to inform us if you need help resolving any error because of this. 
 
-# Sentiment Analysis Project
+# Group Members
 
+# Sentiment Analysis Project
 This project performs sentiment analysis using multiple machine learning and rule-based approaches. It involves data preparation, training, testing, and validation, with a user interface for visualizing results and allowing user interaction.
+
+Timon Kuhl - 7594995  
+Maitreyi Hundekari - 8812928  
+Lukas Weißschädel - 4951094
+
+# Project Goal
+Sentiment analysis has a high economic relevance as it enables companies to better assess the general market sentiment in social media.
+
+In order to perform sentiment analysis automatically, modern technologies such as machine learning are required.
+
+The aim of this project is to compare different approaches and models for sentiment analysis and to work out the best model. 
+
+Based on this, a UI is to be created that enables the best models to be used. 
 
 ### Used Python Version
 
@@ -15,6 +29,8 @@ Python 3.12.3
 - Validation dataset: ['https://github.com/zfz/twitter_corpus'](https://github.com/zfz/twitter_corpus/blob/master/full-corpus.csv)
 - The Twitter corpus is smaller but manually labeled, making it ideal for validation.
 ### Data Preprocessing
+upload the Kaggle data set to the Data-Preparation/sentiment140 folder
+and the data set full-corpus into the folder Data-Preparation/Twitter-Corpus
 
 Data preprocessing takes place in `Preprocessing.ipynb`.
 ## Execution Guide
