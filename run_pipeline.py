@@ -1,11 +1,12 @@
 import os
-import nbformat
-from nbconvert.preprocessors import ExecutePreprocessor
 import time
 import subprocess
 import sys
 
 def run_notebook(notebook_path):
+    # Libraries get imported here because they are not native to python and require the requirements.txt installation
+    import nbformat
+    from nbconvert.preprocessors import ExecutePreprocessor
     """Run a Jupyter notebook."""
     print(f"Running notebook: {notebook_path}")
     if not os.path.exists(notebook_path):
@@ -105,6 +106,7 @@ def start_pipeline():
     """Start the full workflow pipeline."""
     total_start_time = time.time()
     install_requirements()
+    
     data_preparation() 
     run_training() 
     run_testing() 
